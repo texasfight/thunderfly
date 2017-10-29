@@ -16,11 +16,19 @@
         var music_url = "{{ music_url }}"; // value inserted by Flask
         var session_key = "{{ session_key }}"; // value inserted by Flask
         var secret_key = "{{ secret_key }}"; // value inserted by Flask
+        var offset = {{ time_delay }};
+        var reference = Number.MAX_VALUE;
+        function starter(){
+            if (Date.now() >= reference){
+                sound.play()
+            }
+        }
         function start(){
-            var d = new Date()
-            $.post("/host/"+session_key+"/"+secret_key+"/"+d.getSeconds());
+            var current_time = Date.now()
+            reference = current_time+offset;
+            $.post("/host/"+session_key+"/"+secret_key+"/"+reference);
+            setInterval(starter, 5)
         }
         sound = document.getElementById("soundbar")
-        sound.play()
     </script>
 </html>

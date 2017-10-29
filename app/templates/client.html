@@ -12,15 +12,25 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
         var session_key = "{{ session_key }}";
+        var music_url = "{{ music_url }}"
+        var reference = Number.MAX_VALUE
+        sound = document.getElementById("soundbar")
+        function starter(){
+            if (Date.now() >= reference){
+                sound.play()
+            }
+        }
+        interval = setInterval(pollhome, 1000);
         function pollhome(){
             $.post("/client/"+session_key,
             success=function (data){
-                alert(data.music_url);
-                alert(data.time);
+                music_url=data.music_url;
+                reference=data.time;
+                if (reference!=null) {
+                    clearInterval(interval)
+                    setInterval(starter, 5);
+                }
             });
         }
-        setInterval(pollhome, 1000);
-        sound = document.getElementById("soundbar")
-        sound.play()
     </script>
 </html>
