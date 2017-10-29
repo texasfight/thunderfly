@@ -8,6 +8,7 @@
         Connected to session <strong>{{ session_key }}</strong>.
         <!--<audio id="sound" src="http://freemusicarchive.org/music/download/fdb8d8cc52e0e02e090c3eafd9a701f5049ec7dd" autoplay preload="auto"></audio>-->
         <audio id="soundbar" src="{{ music_url }}" preload="auto"></audio>
+        <div id="timer"></div>
     </body>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
@@ -15,8 +16,11 @@
         var music_url = "{{ music_url }}"
         var reference = Number.MAX_VALUE
         sound = document.getElementById("soundbar")
+        timer = document.getElementById("timer")
         function starter(){
-            if (Date.now() >= reference){
+            timer.innerHTML=reference-(new Date).getTime();
+            if ((new Date).getTime() >= reference){
+                timer.innerHTML="GO";
                 sound.play()
             }
         }
@@ -28,7 +32,7 @@
                 reference=data.time;
                 if (reference!=null) {
                     clearInterval(interval)
-                    setInterval(starter, 5);
+                    setInterval(starter, 1);
                 }
             });
         }
