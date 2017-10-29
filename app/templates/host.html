@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Thunderfly</title>
+        <title>TF - Hosting Session</title>
         <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="../static/styles/skeleton.css" />
+        <link rel="stylesheet" href="../static/styles/normalize.css"/>
+        <link rel="stylesheet" href="../static/styles/style.css"/>
     </head>
-    <body>
-        Controlling session <strong>{{ session_key }}</strong>.
-        Using music file <strong>{{ music_url }}</strong>.
-        <input type="button" id="start" value="start playing in 3 seconds" onclick="start();">
+    <body bgcolor="#262425">
+
+        <section class="header2">
+            <h2 class="isWhite"><strong>thunderfly</strong></h2>
+        </section>
+
+        <p class="isWhite center">Controlling session <strong>{{ session_key }}</strong>.<br />
+            Using music file <strong>{{ music_url }}</strong>.</p>
+        <input type="button" class="button-primary offset-by-four columns four columns" id="start" value="start playing in 3 seconds" onclick="start();">
         <!--<audio id="sound" src="http://freemusicarchive.org/music/download/fdb8d8cc52e0e02e090c3eafd9a701f5049ec7dd" autoplay preload="auto"></audio>-->
         <audio id="soundbar" src="{{ music_url }}" preload="auto"></audio>
         <div id="timer"></div>
