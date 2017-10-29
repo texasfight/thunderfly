@@ -10,6 +10,7 @@
         <input type="button" id="start" value="start playing in 3 seconds" onclick="start();">
         <!--<audio id="sound" src="http://freemusicarchive.org/music/download/fdb8d8cc52e0e02e090c3eafd9a701f5049ec7dd" autoplay preload="auto"></audio>-->
         <audio id="soundbar" src="{{ music_url }}" preload="auto"></audio>
+        <div id="timer"></div>
     </body>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
@@ -18,17 +19,20 @@
         var secret_key = "{{ secret_key }}"; // value inserted by Flask
         var offset = {{ time_delay }};
         var reference = Number.MAX_VALUE;
+        sound = document.getElementById("soundbar")
+        timer = document.getElementById("timer")
         function starter(){
-            if (Date.now() >= reference){
+            timer.innerHTML=reference-(new Date).getTime();
+            if ((new Date).getTime() >= reference){
+                timer.innerHTML="GO";
                 sound.play()
             }
         }
         function start(){
-            var current_time = Date.now()
+            var current_time = (new Date).getTime()
             reference = current_time+offset;
             $.post("/host/"+session_key+"/"+secret_key+"/"+reference);
-            setInterval(starter, 5)
+            setInterval(starter, 1)
         }
-        sound = document.getElementById("soundbar")
     </script>
 </html>
