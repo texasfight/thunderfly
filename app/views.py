@@ -9,10 +9,11 @@ sessions = {}
 
 def create_session(music_url):
     """Create a session."""
-    key_length = 5
+    session_key_length = 5
+    secret_key_length = 20
     letters = string.ascii_uppercase
-    session_key = ''.join(random.choice(letters) for i in range(key_length))
-    secret_key = ''.join(random.choice(letters) for i in range(key_length))
+    session_key = ''.join(random.choice(letters) for i in range(session_key_length))
+    secret_key = ''.join(random.choice(letters) for i in range(secret_key_length))
     sessions[session_key] = [music_url, secret_key, None] # store URL, time
     return session_key, secret_key
 
@@ -22,7 +23,7 @@ def index():
     """Home page."""
     return render_template('index.html')
 
-@app.route('/host/<music_url>', methods=['GET'])
+@app.route('/host/<path:music_url>', methods=['GET'])
 @app.route('/host/<session_key>/<secret_key>/<time>', methods=['POST'])
 def host(music_url='', session_key='', secret_key='', time=''):
     """Host page."""
@@ -43,7 +44,7 @@ def host(music_url='', session_key='', secret_key='', time=''):
         print(time)
         return jsonify('hi')
 
-@app.route('/client/<session_key>', methods=['GET'])
+@app.route('/client/<session_key>', methods=['GET', 'POST'])
 def client(session_key):
     """Client page."""
 
@@ -51,7 +52,9 @@ def client(session_key):
     if request.method == 'GET':
         print('Received request to join session {}'.format(session_key))
         if session_key in sessions:
-            return render_template('client.html', session_key=session_key)
+            music_url = sessions[session_key][0]
+            return render_template('client.html', music_url=music_url,
+                                   session_key=session_key)
         else:
             return redirect('/index')
 

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>ThunderFly</title>
+        <title>Thunderfly</title>
         <meta charset="UTF-8">
     </head>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
         function newsession(){
-            window.open("/host/"+music_url.value, "_self");
+            window.open("/host/"+encodeURIComponent(music_url.value), "_self");
         }
         function joinsession(){
             window.open("/client/"+session_key.value, "_self");
         }
     </script>
     <body>
-        <h2><strong>ThunderFly</strong></h2>
-        <input id="music_url" type="text" value="test.mp3">
+        <h2><strong>Thunderfly</strong></h2>
+        <input id="music_url" type="text" value="http://freemusicarchive.org/music/download/fdb8d8cc52e0e02e090c3eafd9a701f5049ec7dd">
         <input type="button" value="NEW" onclick="newsession(this.form);">
         <input id="session_key" type="text" value="sessionkey">
         <input type="button" value="JOIN" onclick="joinsession(this.form);">
