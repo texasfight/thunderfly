@@ -1,2 +1,1 @@
-web: python3 run.py
-worker: python3 run.py
+web: gunicorn app:app
