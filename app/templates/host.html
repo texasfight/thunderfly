@@ -18,11 +18,16 @@
         var secret_key = "{{ secret_key }}"; // value inserted by Flask
         var offset = {{ time_delay }};
         var reference = Number.MAX_VALUE;
+        function starter(){
+            if (Date.now() >= reference){
+                sound.play()
+            }
+        }
         function start(){
             var current_time = Date.now()
-            var reference = current_time+offset;
+            reference = current_time+offset;
             $.post("/host/"+session_key+"/"+secret_key+"/"+reference);
-            setTimeout(sound.play(), reference);
+            setInterval(starter, 5)
         }
         sound = document.getElementById("soundbar")
     </script>
