@@ -23,13 +23,15 @@
         </p>
 
         <p>
-        <input class="alignCenter" id="music_url" type="text" value="http://freemusicarchive.org/music/download/fdb8d8cc52e0e02e090c3eafd9a701f5049ec7dd">
-        <input type="button" class="button-primary alignCenter" value="NEW" onclick="newsession(this.form);"><br />
+        <input class="alignCenter normal six columns offset-by-two columns" id="music_url" type="text" value="http://freemusicarchive.org/music/download/fdb8d8cc52e0e02e090c3eafd9a701f5049ec7dd">
+        <input type="button" class="button-primary" value="NEW" onclick="newsession(this.form);"><br />
         <p class="center"> Creates new lobby and generates access code. </p>
         <br />
         </p>
-        <input class="alignCenter" id="session_key" type="text" value="sessionkey">
-        <input type="button" value="JOIN" class="button-primary alignCenter" onclick="joinsession(this.form);">
+        <input class="six columns offset-by-two columns" id="session_key" type="text">
+        <input type="button" value="JOIN" class="button-primary" onclick="joinsession(this.form);">
+        <p class="center"> <br /> Please use all uppercase letters for the session key.<br /> </p>
+    
     </body>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
