@@ -7,10 +7,12 @@ from app import app
 
 sessions = {}
 
+session_key_length = 5
+secret_key_length = 20
+time_delay = 5000 # milliseconds
+
 def create_session(music_url):
     """Create a session."""
-    session_key_length = 5
-    secret_key_length = 20
     letters = string.ascii_uppercase
     session_key = ''.join(random.choice(letters) for i in range(session_key_length))
     secret_key = ''.join(random.choice(letters) for i in range(secret_key_length))
@@ -34,15 +36,17 @@ def host(music_url='', session_key='', secret_key='', time=''):
         session_key, secret_key = create_session(music_url)
         print('Creating session {} for url {}.'.format(session_key, music_url))
         return render_template('host.html', music_url=music_url,
-                               session_key=session_key, secret_key=secret_key)
+                               session_key=session_key, secret_key=secret_key,
+                               time_delay=time_delay)
 
     # If authenticated, start time
     if request.method == 'POST':
-        print('Received host POST request to time new session.')
-        print(session_key)
-        print(secret_key)
-        print(time)
-        return jsonify('hi')
+        if session_key in sessions and sessions[session_key][1] == secret_key:
+            print('Received host POST request to time new session.')
+            sessions[session_key][2] = time
+        else:
+            print('Received invalid host POST request to time new session.')
+        return jsonify('')
 
 @app.route('/client/<session_key>', methods=['GET', 'POST'])
 def client(session_key):
@@ -54,16 +58,16 @@ def client(session_key):
         if session_key in sessions:
             music_url = sessions[session_key][0]
             return render_template('client.html', music_url=music_url,
-                                   session_key=session_key)
+                                   session_key=session_key, time_delay=time_delay)
         else:
             return redirect('/index')
 
     # If extant, get session information
     if request.method == 'POST':
-        print('Received request for time information on session {}'.format(session_key))
+        print('Received request for time information on session {}.'.format(session_key))
         if session_key in sessions:
             music_url = sessions[session_key][0]
-            time = sessions[session_key][0]
+            time = sessions[session_key][2]
             return jsonify(music_url=music_url, time=time)
         else:
             return redirect('/index')
