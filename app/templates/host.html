@@ -8,7 +8,15 @@
         <link rel="stylesheet" href="../static/styles/style.css"/>
     </head>
     <body bgcolor="#262425">
-
-        <script src="../static/host.js"></script>
+        <input type="submit" id="start" value="start in 3" onClick="start();">
     </body>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        var key = {{ key }} // value inserted by Flask
+        var secret_key = {{ secret_key }} // value inserted by Flask
+        function start(){
+            $.post("/host", {"data": "starting", "key": key, "secret_key": secret_key})
+        }
+    </script>
+    <script src="../static/host.js"></script>
 </html>
