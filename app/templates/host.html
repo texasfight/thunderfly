@@ -28,20 +28,28 @@
         var secret_key = "{{ secret_key }}"; // value inserted by Flask
         var offset = {{ time_delay }};
         var reference = Number.MAX_VALUE;
-        sound = document.getElementById("soundbar")
-        timer = document.getElementById("timer")
+        var startbtn = document.getElementById("start");
+        sound = document.getElementById("soundbar");
+        //timer = document.getElementById("timer");
         function starter(){
-            timer.innerHTML=reference-(new Date).getTime();
-            if ((new Date).getTime() >= reference){
-                timer.innerHTML="GO";
+            //timer.innerHTML=reference-(new Date).getTime();
+            var remaining = (new Date).getTime() >= reference
+            if (remaining){
+                //timer.innerHTML="GO";
                 sound.play()
             }
         }
         function start(){
+            document.getElementById("start").disabled = true;
             var current_time = (new Date).getTime()
             reference = current_time+offset;
-            $.post("/host/"+session_key+"/"+secret_key+"/"+reference);
-            setInterval(starter, 1)
+            $.post("/host/"+session_key+"/"+secret_key+"/"+reference,
+            success=function(data){
+                reference = data.time;
+                if (reference!= null){
+                    setInterval(starter, 1)
+                }
+            });
         }
     </script>
 </html>

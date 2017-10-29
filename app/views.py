@@ -9,7 +9,7 @@ sessions = {}
 
 session_key_length = 5
 secret_key_length = 20
-time_delay = 5000 # milliseconds
+time_delay = 3000 # milliseconds
 
 def create_session(music_url):
     """Create a session."""
@@ -44,9 +44,10 @@ def host(music_url='', session_key='', secret_key='', time=''):
         if session_key in sessions and sessions[session_key][1] == secret_key:
             print('Received host POST request to time new session.')
             sessions[session_key][2] = time
+            return jsonify(time=sessions[session_key][2])
         else:
             print('Received invalid host POST request to time new session.')
-        return jsonify('')
+            return jsonify("")
 
 @app.route('/client/<session_key>', methods=['GET', 'POST'])
 def client(session_key):
