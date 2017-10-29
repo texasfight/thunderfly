@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>ThunderFly</title>
+        <title>Thunderfly</title>
         <meta charset="UTF-8">
     </head>
+    <body>
+        Controlling session <strong>{{ session_key }}</strong>.
+        Using music file <strong>{{ music_url }}</strong>.
+        <input type="button" id="start" value="start playing in 3 seconds" onclick="start();">
+        <!--<audio id="sound" src="http://freemusicarchive.org/music/download/fdb8d8cc52e0e02e090c3eafd9a701f5049ec7dd" autoplay preload="auto"></audio>-->
+        <audio id="soundbar" src="{{ music_url }}" preload="auto"></audio>
+    </body>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
-        var url = 'testmusic'; // value inserted by Flask
-        var key = 'testkey'; // value inserted by Flask
-        var secret_key = 'testsecret'; // value inserted by Flask
+        var music_url = "{{ music_url }}"; // value inserted by Flask
+        var session_key = "{{ session_key }}"; // value inserted by Flask
+        var secret_key = "{{ secret_key }}"; // value inserted by Flask
         function start(){
             var d = new Date()
-            $.post("/host/"+key+"/"+secret_key+"/"+d.getSeconds());
+            $.post("/host/"+session_key+"/"+secret_key+"/"+d.getSeconds());
         }
+        sound = document.getElementById("soundbar")
+        sound.play()
     </script>
-    <body>
-        <input type="submit" id="start" value="start in 3" onClick="start();">
-    </body>
 </html>
