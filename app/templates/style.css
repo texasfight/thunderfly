@@ -1,0 +1,69 @@
+/* This is a CSS comment. I'll explain what I'm doing in these. */
+
+/* This first line is a CSS selector. It says what kind of HTML you want to want to attach your CSS code to. Then you list all the style you want to use for that element. */
+
+/* This selects all HTML surrounded with a p tag. */
+
+p{
+    font: 1em Roboto, Roboto, Sans-Serif;
+    /* CSS styles of similar types often get bundled together. For example, the font attribute actually is the same as:
+    font-size: 2em;
+    font-family: Arial, Helvetica, sans-serif;*/
+    color: whitesmoke;
+}
+
+/* If you want to apply CSS styles to only classes you choose, classes are the best way to go about it. You add any classes that you want to the element in HTML and all styles in the class apply to that element. */
+
+/* Selects all elements with the isGreen class. */
+.isWhite{
+    color: whitesmoke;
+}
+
+
+.header {
+    margin-top: 25rem;
+    text-align: center;
+    font-size: xx-large;
+    margin-bottom: 5rem;
+}
+
+.newLine{
+    line-break: auto;
+
+}
+/* Selects all elements with the bigText class. */
+.bigText{
+    font-size: large;
+}
+
+.isStarter {
+    font-size: medium;
+    text-align: center;
+    color: #4f8182;
+}
+/* Uses the box model to add some space around each li. */
+li{
+    padding: 5px 5px;
+    margin: 30px 30px;
+    border: 1px solid;
+}
+.normal{
+    color: black;
+}
+/* Makes a given element vanish */
+.gone{
+    display: none;
+}
+
+.inputform{
+    width: 300px;
+    margin-right: 20px;
+}
+
+.center{
+    text-align: center;
+}
+
+.buttonSend{
+    margin-left: 20px;
+}
