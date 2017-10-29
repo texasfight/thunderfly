@@ -64,6 +64,9 @@ li{
     text-align: center;
 }
 
+.alignCenter{
+    alignment: center;
+}
 .buttonSend{
     margin-left: 20px;
 }

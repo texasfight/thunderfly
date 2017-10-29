@@ -3,7 +3,34 @@
     <head>
         <title>Thunderfly</title>
         <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="../static/styles/skeleton.css" />
+        <link rel="stylesheet" href="../static/styles/normalize.css"/>
+        <link rel="stylesheet" href="../static/styles/style.css"/>
     </head>
+    <body bgcolor="#262425">
+
+        <section class="header">
+            <h2 class="isWhite"><strong>ThunderFly</strong></h2>
+        </section>
+
+
+        <p id="hello" class="isStarter">Play a music file across multiple devices in unison!</p>
+
+        <p id="secondpara" class="bigText">Either start a new session or join an existing one! <br />
+                    ThunderFly is a tool used to create a stereo-type effect using multiple devices over any operating system.
+            ThunderFly can be used to bullshit in order to make the page look more alive so you better look out, bitch.
+        </p>
+
+        <p>
+        <input class="alignCenter" id="music_url" type="text" value="http://freemusicarchive.org/music/download/fdb8d8cc52e0e02e090c3eafd9a701f5049ec7dd">
+        <input type="button" class="button-primary alignCenter" value="NEW" onclick="newsession(this.form);"><br />
+        <p class="center"> Creates new lobby and generates access code. </p>
+        <br />
+        </p>
+        <input class="alignCenter" id="session_key" type="text" value="sessionkey">
+        <input type="button" value="JOIN" class="button-primary alignCenter" onclick="joinsession(this.form);">
+    </body>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
         function newsession(){
@@ -13,11 +40,4 @@
             window.open("/client/"+session_key.value, "_self");
         }
     </script>
-    <body>
-        <h2><strong>Thunderfly</strong></h2>
-        <input id="music_url" type="text" value="http://freemusicarchive.org/music/download/fdb8d8cc52e0e02e090c3eafd9a701f5049ec7dd">
-        <input type="button" value="NEW" onclick="newsession(this.form);">
-        <input id="session_key" type="text" value="sessionkey">
-        <input type="button" value="JOIN" onclick="joinsession(this.form);">
-    </body>
 </html>
