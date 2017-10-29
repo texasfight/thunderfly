@@ -26,12 +26,17 @@ def index():
 def host():
     """Hosting music."""
     music_url = request.args.get('music_url')
-    print(music_url)
+    key = create_session(music_url)
+    print('Created new session {} for url {}'.format(key, music_url))
     return render_template('host.html', title='Host')
 
 @app.route('/client', methods=['GET'])
 def client():
     """Playing music."""
     session_code = request.args.get('session_code')
-    print(session_code)
-    return render_template('client.html', title='Client')
+    if session_code in sessions:
+        print('Joining session {}.'.format(session_code))
+        return render_template('client.html', title='Client')
+    else:
+        print('No session with code {}.'.format(session_code))
+        return render_template('index.html', title='Home')

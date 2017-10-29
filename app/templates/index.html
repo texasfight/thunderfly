@@ -1,24 +1,16 @@
-{% extends "base.html" %}
-{% block content %}
-    <h1>thunderfly</h1>
-    <form action="/host" method="get">
-        <input type="text" name="music_url" value="test.mp3">
-        <input type="submit" value="new session" onClick="newsession(this.form)">
-    </form>
-    <form action="/client" method="get">
-        <input type="text" name="session_code" value="sessioncode">
-        <input type="submit" value="join session" onClick="joinsession(this.form)">
-    </form>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type="text/javascript">
-        function newsession(form){
-            //var url = form.input.value;
-            //$.post("/index", { type: "new", data: url });
-            //$.get("/host/testurl");
-        }
-        function joinsession(form){
-            var code = form.input.value;
-            $.post("/index", { type: "join", data: code });
-        }
-    </script>
-{% endblock %}
+<html>
+    <head>
+        <title>thunderfly</title>
+    </head>
+    <body>
+        <h1>thunderfly</h1>
+        <form action="/host" method="get">
+            <input type="text" name="music_url" value="test.mp3">
+            <input type="submit" value="new session" onClick="newsession(this.form)">
+        </form>
+        <form action="/client" method="get">
+            <input type="text" name="session_code" value="sessioncode">
+            <input type="submit" value="join session" onClick="joinsession(this.form)">
+        </form>
+    </body>
+</html>
