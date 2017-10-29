@@ -1,3 +1,4 @@
 *.swp
 
+flask/
 __pycache__/

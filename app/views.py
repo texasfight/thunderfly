@@ -2,7 +2,7 @@
 
 import random
 import string
-from flask import render_template, request
+from flask import render_template, request, redirect
 from app import app
 
 sessions = {}
@@ -27,10 +27,21 @@ def index():
 def host():
     """Hosting music."""
     if request.method == 'POST':
-        data = request.form['data']
-        key = request.form['key']
-        secret_key = request.form['secret_key']
-        return render_template('host.html', key=key, secret_key=secret_key)
+        data = request.get_json().get('data', '')
+        print(data)
+        key = request.get_json().get('key', '')
+        secret_key = request.get_json().get('secret_key', '')
+        #key = request.form['key'])
+        #secret_key = request.form['secret_key']
+        print('Incorrect authentication with key {} and secret {}'.format(key, secret_key))
+        if key in sessions and sessions[key] == secret_key: # good request
+            print('Test')
+            sessions[key][2] = 10
+            print('starting session {}'.format(key))
+            return render_template('host.html', key=key, secret_key=secret_key)
+        else:
+            print('Incorrect authentication with key {} and secret {}'.format(key, secret_key))
+            return redirect('/index')
     else:
         music_url = request.args.get('music_url')
         key, secret_key = create_session(music_url)
