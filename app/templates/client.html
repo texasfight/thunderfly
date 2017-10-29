@@ -3,12 +3,16 @@
     <head>
         <title>ThunderFly - </title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../static/styles/skeleton.css" />
-        <link rel="stylesheet" href="../static/styles/normalize.css"/>
-        <link rel="stylesheet" href="../static/styles/style.css"/>
     </head>
-    <body bgcolor="#262425">
-
-        <script src="../static/client.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+    var session_key = "TEST"
+    window.setInterval(ping, 1000);
+    function ping(){
+        $.post("/client/"+key);
+    }
+    </script>
+    <body>
+        Connected to session <strong>{{ session_key }}</strong>.
     </body>
 </html>

@@ -2,7 +2,7 @@
 
 import random
 import string
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, jsonify
 from app import app
 
 sessions = {}
@@ -11,54 +11,56 @@ def create_session(music_url):
     """Create a session."""
     key_length = 5
     letters = string.ascii_uppercase
-    key = ''.join(random.choice(letters) for i in range(key_length))
+    session_key = ''.join(random.choice(letters) for i in range(key_length))
     secret_key = ''.join(random.choice(letters) for i in range(key_length))
-    sessions[key] = [music_url, secret_key, None] # store URL, time
-    print('Creating session {} for url {}.'.format(key, music_url))
-    return key, secret_key
+    sessions[session_key] = [music_url, secret_key, None] # store URL, time
+    return session_key, secret_key
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
     """Home page."""
-    return render_template('index.html', message='')
+    return render_template('index.html')
 
-@app.route('/host', methods=['GET', 'POST'])
-def host():
-    """Hosting music."""
+@app.route('/host/<music_url>', methods=['GET'])
+@app.route('/host/<session_key>/<secret_key>/<time>', methods=['POST'])
+def host(music_url='', session_key='', secret_key='', time=''):
+    """Host page."""
+
+    # Generate new session
+    if request.method == 'GET':
+        print('Received host GET request to create new session.')
+        session_key, secret_key = create_session(music_url)
+        print('Creating session {} for url {}.'.format(session_key, music_url))
+        return render_template('host.html', music_url=music_url,
+                               session_key=session_key, secret_key=secret_key)
+
+    # If authenticated, start time
     if request.method == 'POST':
-        data = request.get_json().get('data', '')
-        print(data)
-        key = request.get_json().get('key', '')
-        secret_key = request.get_json().get('secret_key', '')
-        #key = request.form['key'])
-        #secret_key = request.form['secret_key']
-        print('Incorrect authentication with key {} and secret {}'.format(key, secret_key))
-        if key in sessions and sessions[key] == secret_key: # good request
-            print('Test')
-            sessions[key][2] = 10
-            print('starting session {}'.format(key))
-            return render_template('host.html', key=key, secret_key=secret_key)
+        print('Received host POST request to time new session.')
+        print(session_key)
+        print(secret_key)
+        print(time)
+        return jsonify('hi')
+
+@app.route('/client/<session_key>', methods=['GET'])
+def client(session_key):
+    """Client page."""
+
+    # If extant, join new session
+    if request.method == 'GET':
+        print('Received request to join session {}'.format(session_key))
+        if session_key in sessions:
+            return render_template('client.html', session_key=session_key)
         else:
-            print('Incorrect authentication with key {} and secret {}'.format(key, secret_key))
             return redirect('/index')
-    else:
-        music_url = request.args.get('music_url')
-        key, secret_key = create_session(music_url)
-        print('Created new session {} for url {}'.format(key, music_url))
-        return render_template('host.html', key=key, secret_key=secret_key)
 
-@app.route('/client', methods=['GET', 'POST'])
-def client():
-    """Playing music."""
+    # If extant, get session information
     if request.method == 'POST':
-        pass # give either nothing or time until play
-    else:
-        session_code = request.args.get('session_code')
-        if session_code in sessions:
-            print('Joining session {}.'.format(session_code))
-            return render_template('client.html', title='Client')
+        print('Received request for time information on session {}'.format(session_key))
+        if session_key in sessions:
+            music_url = sessions[session_key][0]
+            time = sessions[session_key][0]
+            return jsonify(music_url=music_url, time=time)
         else:
-            print('No session with code {}.'.format(session_code))
-            return render_template('index.html')
-
+            return redirect('/index')

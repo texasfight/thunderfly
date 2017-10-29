@@ -3,41 +3,18 @@
     <head>
         <title>ThunderFly</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../static/styles/skeleton.css" />
-        <link rel="stylesheet" href="../static/styles/normalize.css"/>
-        <link rel="stylesheet" href="../static/styles/style.css"/>
     </head>
-    <body bgcolor="#262425">
-        <input type="submit" id="start" value="start in 3" onClick="start();">
-    </body>
-    // load jquery
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
-        var key = "{{ key }}" // value inserted by Flask
-        var secret_key = "{{ secret_key }}" // value inserted by Flask
+        var url = 'testmusic'; // value inserted by Flask
+        var key = 'testkey'; // value inserted by Flask
+        var secret_key = 'testsecret'; // value inserted by Flask
         function start(){
-            $.post("/host", {"data": "starting", "key":key, "secret_key":secret_key})
+            var d = new Date()
+            $.post("/host/"+key+"/"+secret_key+"/"+d.getSeconds());
         }
-
-        function myFunction(x) {
-            $.getJSON(
-                '/host', {
-                post: x },
-                function(data) {
-                    var response = data.result;
-                    console.log(response);
-                }
-            );
-        }
-            $.ajax({
-        type: 'POST',
-        url: window.location.href,
-        data: JSON.stringify(response),
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8'
-    }).done(function(msg) {
-        alert("Data Saved: " + msg);
-    });
     </script>
-    <script src="../static/host.js"></script>
+    <body>
+        <input type="submit" id="start" value="start in 3" onClick="start();">
+    </body>
 </html>

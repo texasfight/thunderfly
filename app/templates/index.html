@@ -3,55 +3,21 @@
     <head>
         <title>ThunderFly</title>
         <meta charset="UTF-8">
-        <!--
-        <link rel="stylesheet" href="../static/styles/skeleton.css" />
-        <link rel="stylesheet" href="../static/styles/normalize.css"/>
-        <link rel="stylesheet" href="../static/styles/style.css"/>-->
     </head>
-    <body bgcolor="#262425">
-        <!-- This is the body of the webpage. It holds all the stuff you actually see on the page. Some common tags often used in the body, for reference:
-            h1: Title. Goes up to h6 for 6 different kinds.
-            p: paragraph
-            a: link
-            img: image
-            ul: unordered (bulleted) list
-            ol: ordered (numbered) list
-            li: list element
-            If you want to do something in particular, most of it is online. For example, forms are a little tricky, so I just google "HTML form" and copypaste if I need one.
-            I'd show a form, but we'd need to send the data to a server, which we don't have.
-          -->
-        <section class="header">
-            <h2 class="isWhite"><strong>ThunderFly</strong></h2>
-        </section>
-
-        <p id="hello" class="isStarter">Play a music file across multiple devices in unison!</p>
-
-        <p id="secondpara" class="bigText">Either start a new session or join an existing one! <br />
-            ThunderFly is a tool used to create a stereo-type effect using multiple devices over any operating system.
-            ThunderFly can be used to bullshit in order to make the page look more alive so you better look out, bitch.
-        </p>
-        <p>
-
-            <form action="/host" method="get" class="center">
-            <input id="music_url" type="text" value="test.mp3">
-            <input id="music_submit" type="submit" class="button-primary" value="new session" onClick="newsession(this.form)">
-            </form>
-
-            <br />
-            <p class="center"> Creates new lobby and generates access code. </p>
-            <br />
-
-        </p>
-        <p>
-
-            <form action="/client" method="get" class="center">
-            <input type="text" name="session_code" value="sessioncode">
-            <input type="submit" class="button-primary" value="JOIN" onClick="joinsession(this.form)">
-            </form>
-
-
-        </p>
-
-        <!--<script src="../static/main.js"></script>-->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        function newsession(){
+            window.open("/host/"+music_url.value, "_self");
+        }
+        function joinsession(){
+            window.open("/client/"+session_key.value, "_self");
+        }
+    </script>
+    <body>
+        <h2><strong>ThunderFly</strong></h2>
+        <input id="music_url" type="text" value="test.mp3">
+        <input type="button" value="NEW" onclick="newsession(this.form);">
+        <input id="session_key" type="text" value="sessionkey">
+        <input type="button" value="JOIN" onclick="joinsession(this.form);">
     </body>
 </html>
