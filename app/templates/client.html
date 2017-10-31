@@ -28,6 +28,7 @@
         var music_url = "{{ music_url }}";
         var reference = Number.MAX_VALUE;
         sound = document.getElementById("soundbar");
+        console.log("loaded.");
         //timer = document.getElementById("timer");
         //counterbox = document.getElementById("counterbox");
         //counter = 0;
@@ -36,6 +37,7 @@
             //timer.innerHTML=reference-(new Date()).getTime();
             if ((new Date()).getTime() >= reference){
                 //timer.innerHTML="GO";
+                console.log("starting...")
                 sound.play()
             }
         }

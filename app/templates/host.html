@@ -29,6 +29,7 @@
         var offset = {{ time_delay }};
         var reference = Number.MAX_VALUE;
         var startbtn = document.getElementById("start");
+        console.log("loaded.");
         sound = document.getElementById("soundbar");
         //timer = document.getElementById("timer");
         function starter(){
@@ -36,11 +37,12 @@
             var remaining = (new Date).getTime() >= reference
             if (remaining){
                 //timer.innerHTML="GO";
+                console.log("starting...")
                 sound.play()
             }
         }
         function start(){
-            document.getElementById("start").disabled = true;
+            //document.getElementById("start").disabled = true;
             var current_time = (new Date).getTime()
             reference = current_time+offset;
             $.post("/host/"+session_key+"/"+secret_key+"/"+reference,
