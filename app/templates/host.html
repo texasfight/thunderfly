@@ -31,12 +31,12 @@
         var startbtn = document.getElementById("start");
         console.log("loaded.");
         sound = document.getElementById("soundbar");
-        //timer = document.getElementById("timer");
+        timer = document.getElementById("timer");
         function starter(){
-            //timer.innerHTML=reference-(new Date).getTime();
+            timer.innerHTML=reference-(new Date).getTime();
             var remaining = (new Date).getTime() >= reference
             if (remaining){
-                //timer.innerHTML="GO";
+                timer.innerHTML="GO";
                 console.log("starting...")
                 sound.play()
             }
