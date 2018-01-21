@@ -9,21 +9,24 @@ sessions = {}
 
 session_key_length = 5
 secret_key_length = 20
-time_delay = 3000 # milliseconds
+time_delay = 3000  # milliseconds
+
 
 def create_session(music_url):
     """Create a session."""
     letters = string.ascii_uppercase
     session_key = ''.join(random.choice(letters) for i in range(session_key_length))
     secret_key = ''.join(random.choice(letters) for i in range(secret_key_length))
-    sessions[session_key] = [music_url, secret_key, None] # store URL, time
+    sessions[session_key] = [music_url, secret_key, None]  # store URL, time
     return session_key, secret_key
+
 
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
     """Home page."""
     return render_template('index.html')
+
 
 @app.route('/host/<path:music_url>', methods=['GET'])
 @app.route('/host/<session_key>/<secret_key>/<time>', methods=['POST'])
@@ -48,6 +51,7 @@ def host(music_url='', session_key='', secret_key='', time=''):
         else:
             print('Received invalid host POST request to time new session.')
             return jsonify("")
+
 
 @app.route('/client/<session_key>', methods=['GET', 'POST'])
 def client(session_key):

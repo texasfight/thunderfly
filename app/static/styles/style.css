@@ -26,9 +26,9 @@ p{
     height: 50vh;
     background-size: cover;
     font-size: xx-large;
-    margin-bottom: 5rem;
+    margin-bottom: 0;
     background-image: url("alvaro-bernal-25211.jpg");
-    box-shadow: inset 0 -10px 11px rgba(0, 0, 0, .2)
+    box-shadow: inset 0 -15px 18px rgba(0, 0, 0, .4)
 }
 
 .padded {
