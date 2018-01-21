@@ -1,8 +1,10 @@
 # thunderfly
-Created by Daniel Teal and Irvin Shen.
+Created by Daniel Teal and Irvin Shen.<br/>
+
 Made for HackTX 2017, run by Freetail Hackers and Major League Hacking (MLH).
 Sound sychronizer
 
-An app that attempts to take in a link to music and play it accross multiple devices in a lobby.
+Thunderfly is a small web app created to project audio across multiple devices in a lobby.
+thunderfly was made with Python, Flask, and the a small amount of JS.
 
 thunderfly.tech or thunderfly.herokuapp.com

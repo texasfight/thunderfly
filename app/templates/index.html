@@ -11,9 +11,9 @@
     </head>
     <body bgcolor="#262425">
 
-        <section class="header">
-            <h2 class="center isWhite"><strong>thunderfly</strong></h2>
-        </section>
+        <div class="header">
+            <h2 class="center"><strong>thunderfly</strong></h2>
+        </div>
 
 
         <p id="hello" class="isStarter">Play a music file across multiple devices in unison!</p>
@@ -23,12 +23,12 @@
         </p>
 
         <p>
-        <input class="alignCenter normal six columns offset-by-three columns" id="music_url" type="text" value="http://freemusicarchive.org/music/download/fdb8d8cc52e0e02e090c3eafd9a701f5049ec7dd">
+        <input class="alignCenter normal six columns offset-by-three columns" style="border-radius: 0;" id="music_url" type="text" value="http://freemusicarchive.org/music/download/fdb8d8cc52e0e02e090c3eafd9a701f5049ec7dd">
         <input type="button" class="button-primary padded" value="NEW" onclick="newsession(this.form);"><br />
         <p class="center"> Creates new lobby and generates access code. </p>
         <br />
         </p>
-        <input class="six columns offset-by-three columns" id="session_key" type="text">
+        <input class="six columns offset-by-three columns" style="border-radius: 0;" id="session_key" type="text">
         <input type="button" value="JOIN" class="button-primary padded" onclick="joinsession(this.form);">
         <p class="center"> <br /> Please use all uppercase letters for the session key.<br /> </p>
     
