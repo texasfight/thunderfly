@@ -25,10 +25,17 @@ p{
     padding: 25vh 0;
     height: 50vh;
     background-size: cover;
-    font-size: xx-large;
     margin-bottom: 0;
     background-image: url("alvaro-bernal-25211.jpg");
-    box-shadow: inset 0 -15px 18px rgba(0, 0, 0, .4)
+    box-shadow: inset 0 -15px 18px rgba(0, 0, 0, .4);
+}
+.headtext{
+    text-shadow: 0 0 8px #c0ceff;
+    font-family: "Segoe Print";
+    letter-spacing: 3px;
+    font-size: xx-large;
+    color: black;
+    text-align: center;
 }
 
 .padded {
@@ -76,6 +83,7 @@ li{
 }
 
 .center{
+    margin-top: 5px;
     text-align: center;
 }
 
